@@ -1,0 +1,272 @@
+{
+  "login": [
+    {
+      "success": true,
+      "message": "Login Success",
+      "user": {
+        "uid": 10000001,
+        "name": "User Test",
+        "email": "user.test@gmail.com"
+      }
+    }
+  ],
+  "users": [
+    {
+      "uid": 45382674,
+      "name": "Raiden Shogun",
+      "email": "raiden.shogun@inazuma.com",
+      "password": "12345678"
+    },
+    {
+      "uid": 22057389,
+      "name": "Eula Lawren",
+      "email": "eula.lawren@mondstadt.com",
+      "password": "12345678"
+    },
+    {
+      "uid": 32567367,
+      "name": "Ganyu",
+      "price": "ganyu@liyue.com",
+      "password": "12345678"
+    }
+  ],
+  "categories": [
+    {"id": 1, "name": "Sách", "parent_id": null, "img": ""},
+    {"id": 2, "name": "Phụ kiện", "parent_id": null, "img": ""},
+    {"id": 3, "name": "Bản tin & Bài viết", "img": ""},
+    {"id": 4, "name": "Dịch vụ", "parent_id": null, "img": ""},
+    {"id": 5, "name": "Self-help - Tâm lý - Kỹ năng", "parent_id": 1, "img": "online-store-banner-1.jpg"},
+    {"id": 6, "name": "Vật lý thiên văn", "parent_id": 1, "img": "online-store-banner-1.jpg"},
+    {"id": 7, "name": "Văn học cổ điển", "parent_id": 1, "img": "online-store-banner-1.jpg"},
+    {"id": 8, "name": "Tiểu thuyết", "parent_id": 1, "img": "online-store-banner-1.jpg"},
+    {"id": 9, "name": "Giả tưởng & Khoa học viễn tưởng", "parent_id": 1, "img": "online-store-banner-1.jpg"},
+    {"id": 10, "name": "Kinh tế", "parent_id": 1, "img": "online-store-banner-1.jpg"},
+    {"id": 11, "name": "Tình cảm", "parent_id": 1, "img": "online-store-banner-1.jpg"},
+    {"id": 12, "name": "Lich sử", "parent_id": 1, "img": "online-store-banner-1.jpg"},
+    {"id": 13, "name": "Tự truyện & Hồi ký", "parent_id": 1, "img": "online-store-banner-1.jpg"},
+    {"id": 14, "name": "Giáo trình", "parent_id": 1, "img": "online-store-banner-1.jpg"},
+    {"id": 15, "name": "Bookmark", "parent_id": 2, "img": "online-store-banner-1.jpg"},
+    {"id": 16, "name": "Bìa bọc sách", "parent_id": 2, "img": "online-store-banner-1.jpg"},
+    {"id": 17, "name": "Hình dán nổi", "parent_id": 2, "img": "online-store-banner-1.jpg"},
+    {"id": 18, "name": "Giẩy ghi chú", "parent_id": 2, "img": "online-store-banner-1.jpg"},
+    {"id": 19, "name": "Bút các loại", "parent_id": 2, "img": "online-store-banner-1.jpg"},
+    {"id": 20, "name": "Giá sách mini", "parent_id": 2, "img": "online-store-banner-1.jpg"},
+    {"id": 21, "name": "Chặn sách", "parent_id": 2, "img": "online-store-banner-1.jpg"},
+    {"id": 22, "name": "Cart sách", "parent_id": 2, "img": "online-store-banner-1.jpg"}
+  ],
+  "tags": [
+    {"id": 1, "name": "Book", "slug": "book"},
+    {"id": 2, "name": "Accessory", "slug": "accessory"},
+    {"id": 3, "name": "News", "slug": "news"},
+    {"id": 4, "name": "Self Help", "slug": "selp-help"},
+    {"id": 5, "name": "Fantasy", "slug": "fantasy"},
+    {"id": 6, "name": "Science Fiction", "slug": "sciense-fiction"},
+    {"id": 7, "name": "Astrophysics", "slug": "astrophysics"},
+    {"id": 8, "name": "Economy", "slug": "economy"},
+    {"id": 9, "name": "History", "slug": "history"},
+    {"id": 10, "name": "Top Book", "slug": "top-book"},
+    {"id": 11, "name": "Top Accessory", "slug": "top-accessory"}
+  ],
+  "product": [
+    {
+      "id": 1,
+      "sku": "MSTBDG67SR",
+      "name": "Chuyển sinh thành Raiden Shogun",
+      "type": "book",
+      "category_id": 9,
+      "price": 76000
+    },
+    {
+      "id": 2,
+      "sku": "AU5STB4DTE",
+      "name": "Đêm trăng rừng trúc - Quyển 1",
+      "type": "book",
+      "category_id": 8,
+      "price": 164000
+    },
+    {
+      "id": 3,
+      "sku": "UT6SC47AT4",
+      "name": "Trọn bộ Công chúa heo rừng (4 quyển)",
+      "type": "book",
+      "category_id": 7,
+      "price": 296000
+    },
+    {
+      "id": 4,
+      "sku": "TAY6DVR84C",
+      "name": "Đế quân vi hành - Quyển 1",
+      "type": "book",
+      "category_id": 13,
+      "price": 165000
+    },
+    {
+      "id": 5,
+      "sku": "TAYBCH645D",
+      "name": "Đế quân vi hành - Quyển 2",
+      "type": "book",
+      "category_id": 13,
+      "price": 165000
+    },
+    {
+      "id": 6,
+      "sku": "T65SVCHU8T",
+      "name": "Tiểu hồ ly của đền Narukami",
+      "type": "book",
+      "category_id": 9,
+      "price": 187000
+    },
+    {
+      "id": 7,
+      "sku": "YT67SCRTSB",
+      "name": "Đêm trăng rừng trúc - Quyển 2",
+      "type": "book",
+      "category_id": 8,
+      "price": 164000
+    },
+    {
+      "id": 8,
+      "sku": "TYBTRYRC",
+      "name": "Truyền thuyết  Xích vương",
+      "type": "book",
+      "category_id": 7,
+      "price": 187000
+    },
+    {
+      "id": 9,
+      "sku": "Y78SCNFTS6",
+      "name": "Bookmark Quote Động lực (4 tấm)",
+      "type": "accessory",
+      "category_id": 15,
+      "price": 60000
+    },
+    {
+      "id": 10,
+      "sku": "TYABCGT67D",
+      "name": "Kẹp đánh dấu sách in hình chibi cute (10 kẹp)",
+      "type": "accessory",
+      "category_id": 15,
+      "price": 25000
+    },
+    {
+      "id": 12,
+      "sku": "TYA6C7SYCT",
+      "name": "Giá đỡ đọc sách tiện lợi",
+      "category_id": 20,
+      "price": 59000
+    },
+    {
+      "id": 12,
+      "sku": "TYA6C7SYCT",
+      "name": "Mmluck bút đánh dấu hayao (10 bút)",
+      "type": "accessory",
+      "category_id": 21,
+      "price": 24000
+    },
+    {
+      "id": 14,
+      "sku": "7HCY8DNTOS",
+      "name": "Bộ chặn sách kim loại không ghỉ (Bộ 2 chiếc)",
+      "type": "accessory",
+      "category_id": 7,
+      "price": 42000
+    },
+    {
+      "id": 15,
+      "sku": "UYSNDHC67D",
+      "name": "Bìa bọc sách trong suốt (10 bìa)",
+      "type": "accessory",
+      "category_id": 16,
+      "price": 30000
+    }
+  ],
+  "transactions": [
+    {
+      "id": 10, "status": "done", "transaction_date": "08-08-2023", "transaction_amount": 314000, 
+      "products": [
+        {"id":3, "name": "Trọn bộ Công chúa heo rừng (4 quyển)", "price_sale": 250000, "quantity": 1},
+        {"id":10, "name": "Kẹp đánh dấu sách in hình chibi cute (10 kẹp)", "price_sale": 20000, "quantity": 2},
+        {"id":12, "name": "Mmluck bút đánh dấu hayao (10 bút)", "price_sale": 24000, "quantity": 1}
+      ]
+    },
+    {
+      "id": 10, "status": "done", "transaction_date": "22-08-2023", "transaction_amount": 76000, 
+      "products": [
+        {"id":1, "name": "Chuyển sinh thành Raiden Shogun", "price_sale": 76000, "quantity": 1}
+      ]
+    },
+    {
+      "id": 10, "status": "done", "transaction_date": "09-09-2023", "transaction_amount": 272000, 
+      "products": [
+        {"id":3, "name": "Đêm trăng rừng trúc - Quyển 1", "price_sale": 136000, "quantity": 1},
+        {"id":7, "name": "Đêm trăng rừng trúc - Quyển 2", "price_sale": 13000, "quantity": 1}
+      ]
+    },
+    {
+      "id": 10, "status": "order", "transaction_date": "18-09-2023", "transaction_amount": 90000, 
+      "products": [
+        {"id":14, "name": "Bìa bọc sách trong suốt (10 bìa)", "price_sale": 30000, "quantity": 3}
+      ]
+    }
+  ],
+  "articles": [
+    {"id": 1, "name": "Đánh thức trí tuệ trẻ thơ qua việc đọc sách", "author": "Author 1"},
+    {"id": 2, "name": "Nâng cao văn hóa đọc của người trẻ qua nền tảng số", "author": "Author 5"},
+    {"id": 3, "name": "Vẩn vơ nghĩ vụn mà đầy", "author": "Author 4"},
+    {"id": 4, "name": "“Cánh cổng” - Hãy tự mở cánh cổng mà vào đi!", "author": "Author 5"},
+    {"id": 5, "name": "Ảo tưởng về sự bất khả chiến bại - Cuốn sách giúp doanh nghiệp nhìn trước rủi ro", "author": "Author 3"},
+    {"id": 6, "name": "“Hành trình viết sách: Từ ý tưởng đến hiện thực”", "author": "Author 3"},
+    {"id": 7, "name": "Ngày sách và văn hóa đọc", "author": "Author 2"},
+    {"id": 8, "name": "Khởi động Cuộc thi viết “Trang sách thay đổi đời tôi” năm 2023", "author": "Author 4"},
+    {"id": 9, "name": "Đọc sách: “Đi khi ta còn trẻ” - Hãy sống và hiểu đời qua những bước chân khám phá", "author": "Author 1"},
+    {"id": 10, "name": "Đọc sách: “Trải nghiệm khách hàng xuất sắc” - Cuốn sách đánh thức nhà quản lý", "author": "Author 1"},
+    {"id": 11, "name": "“Biện hộ cho một nền giáo dục khai phóng”: Một nền giáo dục hướng tới con người", "author": "Author 6"},
+    {"id": 12, "name": "“Nếu trái tim biết đập vì con người, ta sẽ nhìn thấy nhiều thứ”", "author": "Author 2"},
+    {"id": 13, "name": "Đọc sách: “Niềm vui và nỗi buồn của công việc”", "author": "Author 1"},
+    {"id": 14, "name": "12 ý tưởng cho góc đọc sách tuyệt vời tại nhà", "author": "Author 4"},
+    {"id": 15, "name": "Văn hóa đọc bắt đầu từ người trẻ", "author": "Author 6"},
+    {"id": 16, "name": "'Một cuộc đời dang dở' - bí mật về John F. Kennedy ", "author": "Author 6"},
+    {"id": 17, "name": "'Chuyện thầy trò' - ký ức về mái trường", "author": "Author 10"},
+    {"id": 18, "name": "3 quyển sách về kiến thức thưởng thức nghệ thuật", "author": "Author 8"},
+    {"id": 19, "name": "13 phát kiến định hình tương lai", "author": "Author 9"},
+    {"id": 20, "name": "'Cú hích' - góc nhìn về kinh tế học hành vi", "author": "Author 1"},
+    {"id": 21, "name": "Đô thị Việt Nam đương đại - từ tổn thương đến chữa lành", "author": "Author 4"},
+    {"id": 22, "name": "'Bốn kiếp thùy liễu' - cốt cách phụ nữ qua truyện Sơn Táp", "author": "Author 7"},
+    {"id": 23, "name": "'Khán giả học' - vai trò của người xem phim", "author": "Author 6"},
+    {"id": 24, "name": "'Mùa hè không tên' - trang sách níu ngày thơ dại", "author": "Author 7"},
+    {"id": 25, "name": "'Cơn lốc quản trị' - khi văn hóa là bệ phóng phát triển", "author": "Author 6"},
+    {"id": 26, "name": "'Phương trình của Chúa' - suy ngẫm về sự tồn tại của con người", "author": "Author 5"},
+    {"id": 27, "name": "Hồi ký Lý Quang Diệu - câu chuyện Singapore 'hóa rồng châu Á'", "author": "Author 2"},
+    {"id": 28, "name": "'Hawking Hawking' - chân dung ít biết về một huyền thoại", "author": "Author 9"},
+    {"id": 29, "name": "Bài học về hạnh phúc trong sách 'Sống đời tự do'", "author": "Author 9"},
+    {"id": 30, "name": "Sách về đầu chữ quốc ngữ", "author": "Author 1"},
+    {"id": 31, "name": "'Hảo nữ Trung Hoa' - tập hồi ký bi thương", "author": "Author 3"},
+    {"id": 32, "name": "'Thời đại thứ tư' thách thức tương lai con người", "author": "Author 2"},
+    {"id": 33, "name": "'Giáo hoàng vật lý' - định mệnh của nhà khoa học trong Thế chiến II", "author": "Author 4"},
+    {"id": 34, "name": "Ấn Độ kiêu hãnh trong 'Những đứa con của nửa đêm'", "author": "Author 7"},
+    {"id": 35, "name": "Lời cảnh báo trong 'Những ngày cuối của dòng Mekong hùng vĩ'", "author": "Author 8"},
+    {"id": 36, "name": "'Cây cam ngọt của tôi' - tiếng lòng trẻ thơ", "author": "Author 1"},
+    {"id": 37, "name": "'Các đế chế ngôn từ' - lịch sử dưới góc nhìn ngôn ngữ", "author": "Author 6"},
+    {"id": 38, "name": "Sách về lập chế độ ăn khoa học", "author": "Author 4"},
+    {"id": 39, "name": "'Gió nổi lên' - giành lấy hạnh phúc từ nỗi buồn", "author": "Author 10"},
+    {"id": 40, "name": "Ra mắt bản dịch tiếng Việt sách 'Lửa và máu' ", "author": "Author 9"}
+  ],
+  "most-read-articles": [
+    {"id": 20, "name": "'Cú hích' - góc nhìn về kinh tế học hành vi", "author": "Author 1", "view": 5346},
+    {"id": 33, "name": "'Giáo hoàng vật lý' - định mệnh của nhà khoa học trong Thế chiến II", "author": "Author 4", "view": 5134},
+    {"id": 3, "name": "Vẩn vơ nghĩ vụn mà đầy", "author": "Author 4", "view": 5008},
+    {"id": 39, "name": "'Gió nổi lên' - giành lấy hạnh phúc từ nỗi buồn", "author": "Author 10", "view": 4987},
+    {"id": 10, "name": "Đọc sách: “Trải nghiệm khách hàng xuất sắc” - Cuốn sách đánh thức nhà quản lý", "author": "Author 1", "view": 4768},
+    {"id": 19, "name": "13 phát kiến định hình tương lai", "author": "Author 9", "view": 5712},
+    {"id": 11, "name": "“Biện hộ cho một nền giáo dục khai phóng”: Một nền giáo dục hướng tới con người", "author": "Author 6", "view": 4498},
+    {"id": 35, "name": "Lời cảnh báo trong 'Những ngày cuối của dòng Mekong hùng vĩ'", "author": "Author 8", "view": 4456}
+  ],
+  "latest-article": [
+    {
+      "id": 40, 
+      "name": "Ra mắt bản dịch tiếng Việt sách 'Lửa và máu' ", 
+      "author": "Author 9",
+      "short_summary": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus praesentium labore accusamus sequi, voluptate debitis tenetur in deleniti possimus modi voluptatum neque maiores dolorem unde? Aut dolorum quod excepturi fugit."
+    }
+  ]
+}
