@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-parsing-error -->
 <template>
     <div class="container-fluit px-4">
         <div class="row my-4">
