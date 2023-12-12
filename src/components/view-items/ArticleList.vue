@@ -6,9 +6,9 @@
             :class="colClass">
             <img src="https://icdn.dantri.com.vn/thumb_w/640/2017/thu-ha8-1500335828606.jpg" alt="" class="img-thumbnail" />
             <div class="px-2">
-                <h4>
-                    <a href="#" class="">{{ item.name }}</a>
-                </h4>
+                <h5>
+                    <router-link href="#" :to="{ name: 'article.detail', params: { id: item.id } }">{{ item.name }}</router-link>
+                </h5>
                 <span class="float-right">- {{ item.author }}</span>
             </div>
         </div>
@@ -22,9 +22,9 @@
                 <img src="https://icdn.dantri.com.vn/thumb_w/640/2017/thu-ha8-1500335828606.jpg" alt="" class="img-thumbnail" />
             </div>
             <div class="px-2 w-75 float-right">
-                <h4>
-                    <a href="#" class="">{{ item.name }}</a>
-                </h4>
+                <h5>
+                    <router-link href="#" :to="{ name: 'article.detail', params: { id: item.id } }">{{ item.name }}</router-link>
+                </h5>
                 <span class="float-right">- {{ item.author }}</span>
             </div>
         </div>
@@ -37,7 +37,7 @@
             <div class="bg-image p-5 text-center shadow-1-strong mb-5 img-thumbnail h-100"
                 style="background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/003.webp');">
                 <h1 class="mb-3 h2">
-                    <a href="#" class="">{{ item.name }}</a>
+                    <router-link href="#" :to="{ name: 'article.detail', params: { id: item.id } }">{{ item.name }}</router-link>
                 </h1>
                 <span class="float-right">- {{ item.author }}</span> <br />
                 <p>

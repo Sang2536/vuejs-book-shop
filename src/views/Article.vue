@@ -17,7 +17,9 @@
             </div>
             <div class="col-md-6 col-lg-6">
                 <div v-for="item in mostReadArticles" :key="item.id">
-                    <h6 class="mb-3 ml-3"><a href="#" class="">{{ item.name }}</a></h6> <hr />
+                    <h6 class="mb-3 ml-3">
+                        <router-link href="#" :to="{ name: 'article.detail', params: { id: item.id } }">{{ item.name }}</router-link>
+                    </h6> <hr />
                 </div>
             </div>
         </div>

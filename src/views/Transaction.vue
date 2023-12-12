@@ -4,6 +4,7 @@
             <div class="col-md-12 col-lg-12 mb-4" v-if="isLogin">
                 <div class="row">
                     <div class="col-md-12 col-lg-12 my-4" v-if="transactionByUser">
+                        <h4>Transactions</h4>
                         <table-record-component />
                     </div>
                     <div class="col-md-12 col-lg-12 my-4" v-else>
@@ -38,10 +39,11 @@ export default {
     components: {
         TableRecordComponent,
     },
+    created() {
+        this.$store.dispatch('fetchTransactionByUser');
+    },
     computed: {
         ...mapGetters([ 'isLogin', 'transactionByUser' ]),
-
-        ...mapActions([ 'fetchTransactionByUser' ])
     },
     methods: {
         ...mapActions([ ])

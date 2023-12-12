@@ -16,8 +16,8 @@
                 <td>{{ item.status }}</td>
                 <td>{{ item.transaction_amount }}d</td>
                 <td>
-                    <button type="button" class="btn btn-info mx-1" @click="buttonShowTransaction">Show Detail</button>
-                    <button type="button" class="btn btn-danger mx-1" v-if="item.status === 'order'" @click="buttonDestroyTransaction">Cancel transaction</button>
+                    <button type="button" class="btn btn-info mx-1" @click="showTransaction">Show Detail</button>
+                    <button type="button" class="btn btn-danger mx-1" v-if="item.status === 'order'" @click="destroyTransaction">Cancel transaction</button>
                 </td>
             </tr>
         </tbody>
@@ -33,7 +33,7 @@ export default {
         ...mapGetters([ 'transactionByUser' ]),
     },
     methods: {
-        ...mapActions([ 'buttonShowTransaction', 'buttonDestroyTransaction' ])
+        ...mapActions([ 'showTransaction', 'destroyTransaction' ])
     }
 }
 </script>

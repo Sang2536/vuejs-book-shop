@@ -11,9 +11,11 @@ import HommePage from "./views/Home.vue";
 import ProductPage from "./views/Product.vue";
 import ProductDetailPage from "./views/ProductDetail.vue";
 import ArticlePage from "./views/Article.vue";
+import ArticleDetailPage from "./views/ArticleDetail.vue";
 import CartPage from "./views/Cart.vue";
 import TransactionPage from "./views/Transaction.vue";
-import AccountPage from "./views/Account.vue";
+import ProfileUserPage from "./views/ProfileUser.vue";
+import FavoritePage from "./views/Favorite.vue";
 import AboutUsPage from "./views/AboutUs.vue";
 
 
@@ -49,7 +51,7 @@ const routes = [
         component: ProductPage,
     },
     {
-        path: "/product-detail",
+        path: "/product/detail/:id",
         name: "product.detail",
         component: ProductDetailPage,
     },
@@ -57,6 +59,11 @@ const routes = [
         path: "/articles",
         name: "articles.index",
         component: ArticlePage,
+    },
+    {
+        path: "/article/detail/:id",
+        name: "article.detail",
+        component: ArticleDetailPage,
     },
     {
         path: "/cart",
@@ -69,9 +76,14 @@ const routes = [
         component: TransactionPage,
     },
     {
-        path: "/account/:uid",
-        name: "account.index",
-        component: AccountPage,
+        path: "/profile/:uid",
+        name: "profile.index",
+        component: ProfileUserPage,
+    },
+    {
+        path: "/favorite/:uid",
+        name: "favorite.index",
+        component: FavoritePage,
     },
     {
         path: "/about-us",

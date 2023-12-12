@@ -5,7 +5,7 @@
                 <a class="page-link" href="#" tabindex="-1">Previous</a>
             </li>
             <div v-for="index in totalPagination" :key="index">
-                <li class="page-item" :class="{ active: currentIndexPagination === (index) }" @click="handleClickPagination(index)">
+                <li class="page-item" :class="{ active: currentIndexPagination === (index) }" @click="handleClickNumberPage(index)">
                     <a class="page-link" href="#">{{ index }}</a>
                 </li>
             </div>
@@ -25,7 +25,7 @@ export default {
         ...mapGetters([ 'totalPagination', 'currentIndexPagination' ])
     },
     methods: {
-        ...mapActions([ 'handleClickPagination', 'handleClickPrevPage', 'handleClickNextPage' ])
+        ...mapActions([ 'handleClickNumberPage', 'handleClickPrevPage', 'handleClickNextPage' ])
     }
 }
 </script>

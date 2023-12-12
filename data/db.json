@@ -65,72 +65,129 @@
     {"id": 8, "name": "Economy", "slug": "economy"},
     {"id": 9, "name": "History", "slug": "history"},
     {"id": 10, "name": "Top Book", "slug": "top-book"},
-    {"id": 11, "name": "Top Accessory", "slug": "top-accessory"}
+    {"id": 11, "name": "Top Accessory", "slug": "top-accessory"},
+    {"id": 12, "name": "Autobiography And Memoir", "slug": "autobiography-and-memoir"},
+    {"id": 13, "name": "Classical Literature", "slug": "classical-literature"}
   ],
   "product": [
     {
       "id": 1,
       "sku": "MSTBDG67SR",
       "name": "Chuyển sinh thành Raiden Shogun",
+      "author": "Group of authors",
+      "publishing_company": "YEA Publishers",
       "type": "book",
       "category_id": 9,
-      "price": 76000
+      "price": 76000,
+      "quantity": 0,
+      "tags": [
+        {"id": 1, "name": "Book", "slug": "book"},
+        {"id": 5, "name": "Fantasy", "slug": "fantasy"}
+      ]
     },
     {
       "id": 2,
       "sku": "AU5STB4DTE",
       "name": "Đêm trăng rừng trúc - Quyển 1",
+      "author": "Group of authors",
+      "publishing_company": "YOUNG Publishers",
       "type": "book",
       "category_id": 8,
-      "price": 164000
+      "price": 164000,
+      "quantity": 95,
+      "tags": [
+        {"id": 1, "name": "Book", "slug": "book"},
+        {"id": 5, "name": "Fantasy", "slug": "fantasy"}
+      ]
     },
     {
       "id": 3,
       "sku": "UT6SC47AT4",
       "name": "Trọn bộ Công chúa heo rừng (4 quyển)",
+      "author": "Group of authors",
+      "publishing_company": "YEA Publishers",
       "type": "book",
       "category_id": 7,
-      "price": 296000
+      "price": 296000,
+      "quantity": 137,
+      "tags": [
+        {"id": 1, "name": "Book", "slug": "book"}
+      ]
     },
     {
       "id": 4,
       "sku": "TAY6DVR84C",
       "name": "Đế quân vi hành - Quyển 1",
+      "author": "Group of authors",
+      "publishing_company": "Liyue Publishers",
       "type": "book",
       "category_id": 13,
-      "price": 165000
+      "price": 165000,
+      "quantity": 143,
+      "tags": [
+        {"id": 1, "name": "Book", "slug": "book"},
+        {"id": 12, "name": "Autobiography And Memoir", "slug": "autobiography-and-memoir"}
+      ]
     },
     {
       "id": 5,
       "sku": "TAYBCH645D",
       "name": "Đế quân vi hành - Quyển 2",
+      "author": "Group of authors",
+      "publishing_company": "Liyue Publishers",
       "type": "book",
       "category_id": 13,
-      "price": 165000
+      "price": 165000,
+      "quantity": 157,
+      "tags": [
+        {"id": 1, "name": "Book", "slug": "book"},
+        {"id": 12, "name": "Autobiography And Memoir", "slug": "autobiography-and-memoir"}
+      ]
     },
     {
       "id": 6,
       "sku": "T65SVCHU8T",
       "name": "Tiểu hồ ly của đền Narukami",
+      "author": "Group of authors",
+      "publishing_company": "YEA Publishers",
       "type": "book",
       "category_id": 9,
-      "price": 187000
+      "price": 187000,
+      "quantity": 232,
+      "tags": [
+        {"id": 1, "name": "Book", "slug": "book"},
+        {"id": 5, "name": "Fantasy", "slug": "fantasy"}
+      ]
     },
     {
       "id": 7,
       "sku": "YT67SCRTSB",
       "name": "Đêm trăng rừng trúc - Quyển 2",
+      "author": "Group of authors",
+      "publishing_company": "YOUNG Publishers",
       "type": "book",
       "category_id": 8,
-      "price": 164000
+      "price": 164000,
+      "quantity": 191,
+      "tags": [
+        {"id": 1, "name": "Book", "slug": "book"},
+        {"id": 13, "name": "Classical Literature", "slug": "classical-literature"}
+      ]
     },
     {
       "id": 8,
       "sku": "TYBTRYRC",
       "name": "Truyền thuyết  Xích vương",
+      "author": "Group of authors",
+      "publishing_company": "Sumeru Wind Institute",
       "type": "book",
       "category_id": 7,
-      "price": 187000
+      "price": 187000,
+      "quantity": 56,
+      "tags": [
+        {"id": 1, "name": "Book", "slug": "book"},
+        {"id": 5, "name": "Fantasy", "slug": "fantasy"}
+      ]
     },
     {
       "id": 9,
@@ -138,7 +195,11 @@
       "name": "Bookmark Quote Động lực (4 tấm)",
       "type": "accessory",
       "category_id": 15,
-      "price": 60000
+      "price": 60000,
+      "quantity": 0,
+      "tags": [
+        {"id": 2, "name": "Accessory", "slug": "accessory"}
+      ]
     },
     {
       "id": 10,
@@ -146,14 +207,22 @@
       "name": "Kẹp đánh dấu sách in hình chibi cute (10 kẹp)",
       "type": "accessory",
       "category_id": 15,
-      "price": 25000
+      "price": 25000,
+      "quantity": 587,
+      "tags": [
+        {"id": 2, "name": "Accessory", "slug": "accessory"}
+      ]
     },
     {
       "id": 12,
       "sku": "TYA6C7SYCT",
       "name": "Giá đỡ đọc sách tiện lợi",
       "category_id": 20,
-      "price": 59000
+      "price": 59000,
+      "quantity": 372,
+      "tags": [
+        {"id": 2, "name": "Accessory", "slug": "accessory"}
+      ]
     },
     {
       "id": 12,
@@ -161,7 +230,11 @@
       "name": "Mmluck bút đánh dấu hayao (10 bút)",
       "type": "accessory",
       "category_id": 21,
-      "price": 24000
+      "price": 24000,
+      "quantity": 557,
+      "tags": [
+        {"id": 2, "name": "Accessory", "slug": "accessory"}
+      ]
     },
     {
       "id": 14,
@@ -169,7 +242,11 @@
       "name": "Bộ chặn sách kim loại không ghỉ (Bộ 2 chiếc)",
       "type": "accessory",
       "category_id": 7,
-      "price": 42000
+      "price": 42000,
+      "quantity": 184,
+      "tags": [
+        {"id": 2, "name": "Accessory", "slug": "accessory"}
+      ]
     },
     {
       "id": 15,
@@ -177,7 +254,11 @@
       "name": "Bìa bọc sách trong suốt (10 bìa)",
       "type": "accessory",
       "category_id": 16,
-      "price": 30000
+      "price": 30000,
+      "quantity": 187,
+      "tags": [
+        {"id": 2, "name": "Accessory", "slug": "accessory"}
+      ]
     }
   ],
   "transactions": [

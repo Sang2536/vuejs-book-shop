@@ -23,7 +23,7 @@
                         <filter-search />
                     </div>
                     <div class="tab-pane" id="filter-tags">
-                        <hashtag-comonent />
+                        <hashtag-comonent :listTag="tags" />
                     </div>
                 </div>
             </div>
@@ -36,21 +36,23 @@
                         <carousel-component />
                     </div>
                 </div>
-                <product-list v-if="productSearch" :productList="productSearch" />
-                <product-list v-else :productList="productAll" />
+                <div class="row">
+                    <product-list v-if="productSearch" :productList="productSearch" />
+                    <product-list v-else :productList="productAll" />
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 import CarouselComponent from "../components/Carousel.vue";
 import HashtagComonent from "../components/view-items/Hashtag.vue";
 import CategoryProduct from "../components/view-items/CategoryProduct.vue";
 import FilterSearch from "../components/view-items/FilterProduct.vue";
 import ProductList from "../components/view-items/ProductList.vue"
-
-import { mapActions, mapGetters } from "vuex";
 
 export default {
     name: "ProductPage",
@@ -62,11 +64,12 @@ export default {
         ProductList,
     },
     computed: {
-        ...mapGetters([ 'dataFormSearchProduct', 'categoryAll', 'productAll', 'productSearch' ]),
+        ...mapGetters([ 'tags', 'dataFormSearchProduct', 'categoryAll', 'productAll', 'productSearch' ]),
     },
     created() {
         this.$store.dispatch('fetchCategoryAll');
         this.$store.dispatch('fetchProductAll');
+        this.$store.dispatch('fetchTags');
     },
     methods: {
         ...mapActions([ 'searchProduct'])

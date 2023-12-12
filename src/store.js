@@ -24,6 +24,11 @@ const store = createStore({
         productBook: null,
         productAccessory: null,
         productSearch: null,
+        productDetail: null,
+        productInCart: [],
+
+        //  cart
+        totalAmountInCart: 0,
 
         // transactions
         transactionByUser: null,
@@ -32,6 +37,10 @@ const store = createStore({
         articles: null,
         latestArticle: null,
         mostReadArticles: null,
+        articleDetail: null,
+
+        //  favorite
+        itemFavorites: null,
 
         // pagination
         totalPagination: [],
@@ -89,6 +98,18 @@ const store = createStore({
             return state.productSearch;
         },
 
+        productDetail(state) {
+            return state.productDetail;
+        },
+
+        productInCart(state) {
+            return state.productInCart;
+        },
+
+        totalAmountInCart(state) {
+            return state.totalAmountInCart;
+        },
+
         transactionByUser(state) {
             return state.transactionByUser;
         },
@@ -103,6 +124,14 @@ const store = createStore({
 
         mostReadArticles(state) {
             return state.mostReadArticles;
+        },
+
+        articleDetail(state) {
+            return state.articleDetail;
+        },
+
+        itemFavorites(state) {
+            return state.itemFavorites;
         },
 
         totalPagination(state) {
@@ -156,6 +185,18 @@ const store = createStore({
             state.productAccessory = productAccessoryPayload;
         },
 
+        setProductDetail(state, productDetailPayload) {
+            state.productDetail = productDetailPayload;
+        },
+
+        setProductInCart(state, productInCartPayload) {
+            state.productInCart = productInCartPayload;
+        },
+
+        setTotalAmountInCart(state, totalAmountInCartPayload) {
+            state.totalAmountInCart = totalAmountInCartPayload;
+        },
+
         setProductSearch(state, productSearchPayload) {
             state.productSearch = productSearchPayload;
         },
@@ -174,6 +215,14 @@ const store = createStore({
 
         setMostReadArticles(state, mostReadArticlesPayload) {
             state.mostReadArticles = mostReadArticlesPayload;
+        },
+
+        setArticleDetail(state, articleDetailPayload) {
+            state.articleDetail = articleDetailPayload;
+        },
+
+        setItemFavorites(state, itemFavoritesPayload) {
+            state.itemFavorites = itemFavoritesPayload;
         },
 
         setTotalPagination(state, totalPaginationPayload) {
@@ -195,8 +244,6 @@ const store = createStore({
             if(this.state.dataFormLogin.email === '' && this.state.dataFormLogin.password === '') {
                 alert('Vui lòng nhập đầy đủ thông tin Email và Password')
             } else {
-                console.log(this.state.dataFormLogin);
-
                 dispatch('fetchLogin');
 
                 // window.location="http://localhost:8080/home";
@@ -212,8 +259,6 @@ const store = createStore({
                 }
 
                 const data = await res.json();
-
-                console.log(data[0].user);
 
                 commit('setIsLogin', true);
                 commit('setUserLogin', data[0].user);
@@ -238,8 +283,6 @@ const store = createStore({
                 }
 
                 const data = await res.json();
-
-                console.log(data);
 
                 commit('setTags', data);
             } catch (error) {
@@ -308,6 +351,63 @@ const store = createStore({
             } catch (error) {
                 console.log(error);
             }
+        },
+
+        searchProduct() {
+            console.log('searchProduct');
+        },
+
+        async fetchProductDetail({ commit }, input) {
+            try {
+                const res = await fetch('http://localhost:3000/product/' + input.id);
+
+                if(!res.ok) {
+                    throw new Error('Something went wrong.');
+                }
+
+                const data = await res.json();
+
+                commit('setProductDetail', data);
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        addProductToCart({ commit, state }, id) {
+            if(state.isLogin === true) {
+                const productList = [...state.productInCart];
+                var totalAmount = state.totalAmountInCart;
+
+                //  get product
+                state.productAll.forEach(item => {
+                    if(item.id === id) {
+                        productList.push(item);
+                        totalAmount += item.price;
+                    }
+                });
+
+                commit('setProductInCart', productList);
+                commit('setTotalAmountInCart', totalAmount);
+
+                alert('Product has been added to the cart')
+            } else {
+                alert('You are not logged in. Please log in to use this feature');
+            }
+        },
+
+        removeProductFromCart({ commit, state }, id) {
+            const productList = [...state.productInCart];
+            var totalAmount = state.totalAmountInCart;
+
+            productList.forEach((item, index) => {
+                if(item.id === id) {
+                    productList.splice(index, 1);
+                    totalAmount -= item.price;
+                }
+            });
+
+            commit('setProductInCart', productList);
+            commit('setTotalAmountInCart', totalAmount);
         },
 
         async fetchTransactionByUser({ commit, state }) {
@@ -380,8 +480,32 @@ const store = createStore({
             }
         },
 
-        searchProduct() {
-            console.log('searchProduct');
+        async fetchArticleDetail({ commit }, input) {
+            try {
+                const res = await fetch('http://localhost:3000/articles/' + input.id);
+
+                if(!res.ok) {
+                    throw new Error('Something went wrong.');
+                }
+
+                const data = await res.json();
+
+                commit('setArticleDetail', data);
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        addItemToFavorite(id) {
+            console.log(id);
+        },
+
+        removeItemFromFavorite(id) {
+            console.log(id);
+        },
+
+        copyLinkToProduct(id) {
+            console.log(id);
         },
 
         pagination({ commit }, input) {
@@ -402,7 +526,7 @@ const store = createStore({
             commit('setArticlesByPagination', articlesByPage);
         },
 
-        handleClickPagination({ commit, dispatch, state }, index) {
+        handleClickNumberPage({ commit, dispatch, state }, index) {
             commit('setCurrentIndexPagination', index);
 
             dispatch('pagination', { data: state.articles, lengSplice: 14, currentIndex: state.currentIndexPagination });
@@ -424,11 +548,17 @@ const store = createStore({
             }
         },
 
-        buttonShowTransaction() {
-
+        addTransaction() {
+            console.log('addTransaction');
         },
 
-        
+        showTransaction() {
+            console.log('buttonShowTransaction');
+        },
+
+        destroyTransaction() {
+            console.log('buttonDestroyTransaction');
+        },
     }
 });
 
