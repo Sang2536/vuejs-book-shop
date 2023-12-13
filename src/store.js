@@ -1,11 +1,14 @@
 import { createStore } from "vuex";
+import helper from "./helper";
 
 const store = createStore({
     /*  state   =>  contains all data (nơi chứa toàn bộ dữ liệu của ứng dụng)   */
     state:  {
         //  from data
         dataFormLogin: { email: '', password: '' },
+        dataFormRegister: { email: '', name: '', password: '', verifyPassword: '' },
         dataFormSearchProduct: { },
+        msgErrorForm: null,
 
         //  verify data
         isLogin: false,
@@ -54,8 +57,16 @@ const store = createStore({
             return state.dataFormLogin;
         },
 
+        dataFormRegister(state) {
+            return state.dataFormRegister;
+        },
+
         dataFormSearchProduct(state) {
             return state.dataFormSearchProduct;
+        },
+
+        msgErrorForm(state) {
+            return state.msgErrorForm;
         },
 
         isLogin(state) {
@@ -149,6 +160,10 @@ const store = createStore({
 
     /*  mutation => actually change state (thực hiện thay đổi state)    */
     mutations: {
+        setMsgErrorForm(state, msgErrorFormPayload) {
+            state.msgErrorForm = msgErrorFormPayload;
+        },
+
         setIsLogin(state, isLoginPayload) {
             state.isLogin = isLoginPayload;
         },
@@ -240,23 +255,57 @@ const store = createStore({
 
     /*  action  =>   commit mutations (thực hiện mutations) */
     actions: {
-        submitFormLogin({ dispatch }) {
-            if(this.state.dataFormLogin.email === '' && this.state.dataFormLogin.password === '') {
-                alert('Vui lòng nhập đầy đủ thông tin Email và Password')
-            } else {
-                dispatch('fetchLogin');
+        registerUser ({ dispatch, commit, state }) {
+            const dataForm = state.dataFormRegister;
+            const msgError = [];
 
-                // window.location="http://localhost:8080/home";
+            if (dataForm.email === '' || dataForm.name === '' || dataForm.password === '' || dataForm.verifyPassword === '') {
+                msgError.push('There is an empty input in the form');
+            } else if((dataForm.password !== dataForm.verifyPassword)) {
+                msgError.push('Password and Verification password are not the same');
+            }
+
+            if (msgError) {
+                commit('setMsgErrorForm', msgError);
+            } else {
+                dispatch('fetchRegister', dataForm);
+            }
+        },
+
+        async fetchRegister(input) {
+            try {
+                const res = await helper.fetchPost('http://localhost:3000/register', input);
+
+                if(!res.ok) throw new Error('Something went wrong.');
+
+                const data = await res.json();
+
+                return data;
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        submitFormLogin({ dispatch, commit, state }) {
+            const dataForm = state.dataFormLogin;
+            const msgError = [];
+
+            if (dataForm.email === '' || dataForm.password === '') {
+                msgError.push('There is an empty input in the form');
+            } 
+
+            if (msgError) {
+                commit('setMsgErrorForm', msgError);
+            } else {
+                dispatch('fetchRegister');
             }
         },
 
         async fetchLogin({ commit }) {
             try {
-                const res = await fetch('http://localhost:3000/login');
+                const res = await helper.fetchGet('http://localhost:3000/login');
 
-                if(!res.ok) {
-                    throw new Error('Something went wrong.');
-                }
+                if(!res.ok) throw new Error('Something went wrong.');
 
                 const data = await res.json();
 
@@ -276,11 +325,9 @@ const store = createStore({
 
         async fetchTags({ commit }) {
             try {
-                const res = await fetch('http://localhost:3000/tags');
-
-                if (!res.ok) {
-                    throw new Error('Something went wong.');
-                }
+                const res = await helper.fetchGet('http://localhost:3000/tags');
+                
+                if(!res.ok) throw new Error('Something went wrong.');
 
                 const data = await res.json();
 
@@ -292,11 +339,8 @@ const store = createStore({
 
         async fetchCategoryAll({ commit }) {
             try {
-                const res = await fetch('http://localhost:3000/categories');
-
-                if(!res.ok) {
-                    throw new Error('Something went wrong.');
-                }
+                const res = await helper.fetchGet('http://localhost:3000/categories');
+                if(!res.ok) throw new Error('Something went wrong.');
 
                 const data = await res.json();
 
@@ -316,7 +360,6 @@ const store = createStore({
 
                 commit('setCategoryBook', categoryBook);
                 commit('setCategoryAccessory', categoryAccessory);
-        
             } catch (error) {
                 console.log(error);
             }
@@ -324,11 +367,9 @@ const store = createStore({
 
         async fetchProductAll({ commit }) {
             try {
-                const res = await fetch('http://localhost:3000/product');
+                const res = await helper.fetchGet('http://localhost:3000/product');
 
-                if(!res.ok) {
-                    throw new Error('Something went wrong.');
-                }
+                if(!res.ok) throw new Error('Something went wrong.');
 
                 const data = await res.json();
 
@@ -359,11 +400,9 @@ const store = createStore({
 
         async fetchProductDetail({ commit }, input) {
             try {
-                const res = await fetch('http://localhost:3000/product/' + input.id);
+                const res = await helper.fetchGet('http://localhost:3000/product/' + input.id);
 
-                if(!res.ok) {
-                    throw new Error('Something went wrong.');
-                }
+                if(!res.ok) throw new Error('Something went wrong.');
 
                 const data = await res.json();
 
@@ -411,37 +450,32 @@ const store = createStore({
         },
 
         async fetchTransactionByUser({ commit, state }) {
-            if(state.isLogin) {
-                try {
-                    const res = await fetch('http://localhost:3000/transactions');
-    
-                    if(!res.ok) {
-                        throw new Error('Something went wrong.');
-                    }
-    
+            try {
+                if(state.isLogin) {
+                    const res = await helper.fetchGet('http://localhost:3000/transactions');
+
+                    if(!res.ok) throw new Error('Something went wrong.');
+
                     const data = await res.json();
-    
+        
                     commit('setTransactionByUser', data);
-                } catch (error) {
-                    console.log(error);
+                } else {
+                    commit('setTransactionByUser', null);
                 }
-            } else {
-                commit('setTransactionByUser', null);
+            } catch (error) {
+                console.log(error);
             }
         },
 
         async fetchArticles({ commit, dispatch }) {
             try {
-                const res = await fetch('http://localhost:3000/articles');
+                const res = await helper.fetchGet('http://localhost:3000/articles');
 
-                if(!res.ok) {
-                    throw new Error('Something went wrong.');
-                }
+                if(!res.ok) throw new Error('Something went wrong.');
 
                 const data = await res.json();
 
                 commit('setArticles', data);
-
                 dispatch('pagination', { data: data, lengSplice: 14, currentIndex: 1 });
             } catch (error) {
                 console.log(error);
@@ -450,7 +484,7 @@ const store = createStore({
 
         async fetchLatestArticle({ commit }) {
             try {
-                const res = await fetch('http://localhost:3000/latest-article');
+                const res = await helper.fetchGet('http://localhost:3000/latest-article');
 
                 if(!res.ok) {
                     throw new Error('Something went wrong.');
@@ -466,7 +500,7 @@ const store = createStore({
         
         async fetchMostReadArticles({ commit }) {
             try {
-                const res = await fetch('http://localhost:3000/most-read-articles');
+                const res = await helper.fetchGet('http://localhost:3000/most-read-articles');
 
                 if(!res.ok) {
                     throw new Error('Something went wrong.');
@@ -482,7 +516,7 @@ const store = createStore({
 
         async fetchArticleDetail({ commit }, input) {
             try {
-                const res = await fetch('http://localhost:3000/articles/' + input.id);
+                const res = await helper.fetchGet('http://localhost:3000/articles/' + input.id);
 
                 if(!res.ok) {
                     throw new Error('Something went wrong.');
@@ -521,7 +555,6 @@ const store = createStore({
                 totalPage.push(i + 1);
             }
 
-            commit('setAmountDataDisplayed', lengSplice);
             commit('setTotalPagination', totalPage);
             commit('setArticlesByPagination', articlesByPage);
         },
