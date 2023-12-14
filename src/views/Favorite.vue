@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid px-4" v-if="isLogin === true">
+    <div class="container-fluid mx-5" v-if="isLogin === true">
         <div class="row my-4" v-if="itemProductFavorites.length || itemArticleFavorites.length">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-4 text-center">
                 <h1>Favorites Page</h1>

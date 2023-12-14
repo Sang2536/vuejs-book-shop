@@ -10,7 +10,23 @@
                 <p class="card-text">Type: {{ item.type }}</p>
                 <div class="d-flex flex-row">
                     <h5 class="card-text mr-3">Quantity purchased: </h5>
-                    <input type="number" class="float-right text-center" id="quantity-product-in-cart" value="1" />
+                    <button role="button" 
+                        class="btn btn-secondary" 
+                        :disabled="item.quantity <= 1"
+                        @click="changeQuantityInCart({ id: item.id, type: 'minus' })">
+                        -
+                    </button>
+                    <input type="text" 
+                        class="float-right text-center" 
+                        id="quantity-product-in-cart" 
+                        disabled
+                        :value="item.quantity" 
+                        @change="changeQuantityInCart(item.id)" />
+                    <button role="button" 
+                        class="btn btn-secondary" 
+                        @click="changeQuantityInCart({ id: item.id, type: 'plus' })">
+                        +
+                    </button>
                 </div>
             </div>
             <div class="card-footer text-muted w-25 float-right">
@@ -35,7 +51,7 @@ export default {
         ...mapGetters([ 'productInCart', 'totalAmountInCart' ]),
     },
     methods: {
-        ...mapActions([ 'removeProductFromCart', 'addTransaction' ]),
+        ...mapActions([ 'removeProductFromCart', 'addTransaction', 'changeQuantityInCart' ]),
     },
 }
 </script>

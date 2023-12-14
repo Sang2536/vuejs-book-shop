@@ -428,10 +428,25 @@ const store = createStore({
                 const productList = [...state.productInCart];
                 var totalAmount = state.totalAmountInCart;
 
+                // productList.forEach((item, index) => {
+                //     if(item.id === id) {
+                //         productList[index].quantity = item.quantity + 1
+
+                //         totalAmount += item.price * (item.quantity + 1);
+                //     }
+                // });
+
                 //  get product
                 state.productAll.forEach(item => {
                     if(item.id === id) {
-                        productList.push(item);
+                        productList.push({
+                            "id": item.id,
+                            "sku": item.sku,
+                            "name": item.name,
+                            "price": item.price,
+                            "type": item.type,
+                            "quantity": 1,
+                        });
                         totalAmount += item.price;
                     }
                 });
@@ -452,12 +467,35 @@ const store = createStore({
             productList.forEach((item, index) => {
                 if(item.id === id) {
                     productList.splice(index, 1);
-                    totalAmount -= item.price;
+                    totalAmount -= item.price * item.quantity;
                 }
             });
 
             commit('setProductInCart', productList);
             commit('setTotalAmountInCart', totalAmount);
+        },
+
+        changeQuantityInCart({ commit, state }, input) {
+            if(state.isLogin === true) {
+                const productList = [...state.productInCart];
+                var totalAmount = state.totalAmountInCart;
+
+                //  get product
+                productList.forEach((item, index) => {
+                    if(item.id === input.id && input.type === "plus") {
+                        productList[index].quantity = item.quantity + 1;
+                        totalAmount += item.price;
+                    } else if (item.id === input.id && input.type === "minus") {
+                        productList[index].quantity = item.quantity - 1;
+                        totalAmount -= item.price;
+                    }
+                });
+
+                commit('setProductInCart', productList);
+                commit('setTotalAmountInCart', totalAmount);
+            } else {
+                alert('You are not logged in. Please log in to use this feature');
+            }
         },
 
         async fetchTransactionByUser({ commit, state }) {
@@ -551,8 +589,6 @@ const store = createStore({
                     }
                 });
 
-                console.log(productList);
-
                 commit('setItemProductFavorites', productList);
 
                 alert('Product has been added to the favorite');
@@ -565,8 +601,6 @@ const store = createStore({
                     }
                 });
 
-                console.log(articleList);
-
                 commit('setItemArticleFavorites', articleList);
 
                 alert('Artcle has been added to the favorite');
@@ -575,12 +609,70 @@ const store = createStore({
             }
         },
 
-        removeItemFromFavorite(id) {
-            console.log(id);
+        removeItemFromFavorite({ state, commit }, input) {
+            if(state.isLogin === true && input.type === 'product') {
+                const productList = [...state.itemProductFavorites];
+
+                productList.forEach((item, index) => {
+                    if(item.id === input.id) {
+                        productList.splice(index, 1);
+                    }
+                });
+
+                commit('setItemProductFavorites', productList);
+            } else if (state.isLogin === true && input.type === 'article') {
+                const articleList = [...state.itemArticleFavorites];
+
+                articleList.forEach((item, index) => {
+                    if(item.id === input.id) {
+                        articleList.splice(index, 1);
+                    }
+                });
+
+                commit('setItemArticleFavorites', articleList);
+            } else {
+                alert('You are not logged in. Please log in to use this feature.');
+            }
         },
 
         copyLinkToProduct(id) {
             console.log(id);
+        },
+
+        async addTransaction({ commit, state }) {
+            const input = {
+                "id": 11111, 
+                "user_id": state.userLogin.id,
+                "transaction_date": new Date(),
+                "transaction_amount": state.totalAmountInCart,
+                "product": state.productInCart
+            };
+
+            console.log(input);
+
+            // const res = await helper.fetchPost('http://localhost:3000/transactions', input);
+
+            // if(!res.ok) throw new Error('Something went wrong.');
+
+            // const data = await res.json();
+
+            commit('setProductInCart', [])
+        },
+
+        showTransaction() {
+            console.log('buttonShowTransaction');
+        },
+
+        async destroyTransaction({ commit }, input) {
+            const res = await helper.fetchDelete('http://localhost:3000/transactions/' + input.id);
+
+            if(!res.ok) throw new Error('Something went wrong.');
+
+            const data = await res.json();
+
+            console.log(data);
+
+            commit('setTransactionByUser', data);
         },
 
         pagination({ commit }, input) {
@@ -620,18 +712,6 @@ const store = createStore({
 
                 dispatch('pagination', { data: state.articles, lengSplice: 14, currentIndex: state.currentIndexPagination });
             }
-        },
-
-        addTransaction() {
-            console.log('addTransaction');
-        },
-
-        showTransaction() {
-            console.log('buttonShowTransaction');
-        },
-
-        destroyTransaction() {
-            console.log('buttonDestroyTransaction');
         },
     }
 });
