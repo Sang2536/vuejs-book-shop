@@ -214,7 +214,7 @@
       ]
     },
     {
-      "id": 12,
+      "id": 11,
       "sku": "TYA6C7SYCT",
       "name": "Giá đỡ đọc sách tiện lợi",
       "category_id": 20,
@@ -237,6 +237,18 @@
       ]
     },
     {
+      "id": 13,
+      "sku": "TYA6C7SYCT",
+      "name": "Bìa bọc sách nhiều màu (10 cái)",
+      "type": "accessory",
+      "category_id": 21,
+      "price": 24000,
+      "quantity": 257,
+      "tags": [
+        {"id": 2, "name": "Accessory", "slug": "accessory"}
+      ]
+    },
+    {
       "id": 14,
       "sku": "7HCY8DNTOS",
       "name": "Bộ chặn sách kim loại không ghỉ (Bộ 2 chiếc)",
@@ -251,7 +263,7 @@
     {
       "id": 15,
       "sku": "UYSNDHC67D",
-      "name": "Bìa bọc sách trong suốt (10 bìa)",
+      "name": "Bìa bọc sách trong suốt (10 cái)",
       "type": "accessory",
       "category_id": 16,
       "price": 30000,

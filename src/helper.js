@@ -23,12 +23,13 @@ export default {
         const config = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(data),
         };
 
-        fetch(uri, config)
+        const res = fetch(uri, config)
         .then(function (response) {
             return response.json();
         })
@@ -36,6 +37,8 @@ export default {
             console.error(`Error: ${error}`);
             return false;
         });
+
+        return res;
     },
 
     async fetchPut(uri, data) {
@@ -47,7 +50,7 @@ export default {
             body: JSON.stringify(data),
         };
 
-        fetch(uri, config)
+        const res = fetch(uri, config)
         .then(function (response) { 
             return response.json();
         })
@@ -55,6 +58,8 @@ export default {
             console.error(`Error: ${error}`);
             return false;
         });
+
+        return res;
     },
 
     async fetchDelete(uri) {
@@ -65,7 +70,7 @@ export default {
             },
         };
 
-        fetch(uri, config)
+        const res = fetch(uri, config)
         .then(function (response) { 
             return response.json();
         })
@@ -73,5 +78,7 @@ export default {
             console.error(`Error: ${error}`);
             return false;
         });
+
+        return res;
     },
 }

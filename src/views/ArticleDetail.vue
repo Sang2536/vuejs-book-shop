@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row my-4 mb-4 bg-white my-4">
             <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
-                <button role="button" class="btn btn-success mx-1 px-2 w-20 float-left" @click="addItemToFavorite(articleDetail.id)">Favorite</button>
+                <button role="button" class="btn btn-success mx-1 px-2 w-20 float-left" @click="addItemToFavorite({ id: articleDetail.id, type: 'article' })">Favorite</button>
 
                 <div class="article-header mb-4">
                     <h3>{{ articleDetail.name }}</h3>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: "ArticleDetailPage",
@@ -41,6 +41,9 @@ export default {
     },
     created() {
         this.$store.dispatch('fetchArticleDetail', { id: this.$route.params.id });
+    },
+    methods: {
+        ...mapActions([ 'addItemToFavorite' ])
     },
 }
 </script>

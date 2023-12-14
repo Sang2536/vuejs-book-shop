@@ -15,7 +15,7 @@
                         <a class="active" href="#product-review" data-toggle="tab"><i class="fa fa-cubes me-2"></i>product reviews</a>
                     </h6>
                     <button role="button" class="btn btn-info mx-1 px-2 w-20 float-left" @click="copyLinkToProduct(productDetail.id)">Copy link</button>
-                    <button role="button" class="btn btn-success mx-1 px-2 w-20 float-right" @click="addItemToFavorite(productDetail.id)">Favorite</button>
+                    <button role="button" class="btn btn-success mx-1 px-2 w-20 float-right" @click="addItemToFavorite({ id: productDetail.id, type: 'product' })">Favorite</button>
                 </div>
                 <div class="mb-3">
                     <h6 class="w-50 float-left">{{ productDetail.type }} category</h6>

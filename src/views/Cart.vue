@@ -2,9 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-lg-12 mb-4" v-if="isLogin">
-                <product-in-cart />
-                
-                <!-- <div class="row" v-if="productInCart">
+                <div class="row" v-if="productInCart.length">
                     <product-in-cart />
                 </div>
                 <div class="row" v-else>
@@ -17,7 +15,7 @@
                         </h3>
                         <router-link role="button" class="btn btn-primary bg-primary mx-4 my-2" :to="{ name: 'products.index' }">Go to Shop</router-link>
                     </div>
-                </div> -->
+                </div>
             </div>
             <div class="col-md-12 col-lg-12 mb-4" v-else>
                 <img src="../assets/no-login.jpg" alt="img-no-login" class="img-thumbnail" />

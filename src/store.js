@@ -43,7 +43,8 @@ const store = createStore({
         articleDetail: null,
 
         //  favorite
-        itemFavorites: null,
+        itemProductFavorites: [],
+        itemArticleFavorites: [],
 
         // pagination
         totalPagination: [],
@@ -141,8 +142,12 @@ const store = createStore({
             return state.articleDetail;
         },
 
-        itemFavorites(state) {
-            return state.itemFavorites;
+        itemProductFavorites(state) {
+            return state.itemProductFavorites;
+        },
+
+        itemArticleFavorites(state) {
+            return state.itemArticleFavorites;
         },
 
         totalPagination(state) {
@@ -236,8 +241,12 @@ const store = createStore({
             state.articleDetail = articleDetailPayload;
         },
 
-        setItemFavorites(state, itemFavoritesPayload) {
-            state.itemFavorites = itemFavoritesPayload;
+        setItemProductFavorites(state, itemProductFavoritesPayload) {
+            state.itemProductFavorites = itemProductFavoritesPayload;
+        },
+
+        setItemArticleFavorites(state, itemArticleFavoritesPayload) {
+            state.itemArticleFavorites = itemArticleFavoritesPayload;
         },
 
         setTotalPagination(state, totalPaginationPayload) {
@@ -265,16 +274,18 @@ const store = createStore({
                 msgError.push('Password and Verification password are not the same');
             }
 
-            if (msgError) {
+            if (msgError.length) {
                 commit('setMsgErrorForm', msgError);
             } else {
                 dispatch('fetchRegister', dataForm);
             }
         },
 
-        async fetchRegister(input) {
+        // eslint-disable-next-line no-empty-pattern
+        async fetchRegister({}, input) {
             try {
-                const res = await helper.fetchPost('http://localhost:3000/register', input);
+                //  lỗi k đúng data input trong db.json
+                const res = await helper.fetchPost('http://localhost:3000/users', input);
 
                 if(!res.ok) throw new Error('Something went wrong.');
 
@@ -292,12 +303,12 @@ const store = createStore({
 
             if (dataForm.email === '' || dataForm.password === '') {
                 msgError.push('There is an empty input in the form');
-            } 
+            }
 
-            if (msgError) {
+            if (msgError.length) {
                 commit('setMsgErrorForm', msgError);
             } else {
-                dispatch('fetchRegister');
+                dispatch('fetchLogin');
             }
         },
 
@@ -530,8 +541,38 @@ const store = createStore({
             }
         },
 
-        addItemToFavorite(id) {
-            console.log(id);
+        addItemToFavorite({ state, commit }, input) {
+            if(state.isLogin === true && input.type === 'product') {
+                const productList = [...state.itemProductFavorites];
+
+                state.productAll.forEach(item => {
+                    if(item.id === input.id) {
+                        productList.push(item);
+                    }
+                });
+
+                console.log(productList);
+
+                commit('setItemProductFavorites', productList);
+
+                alert('Product has been added to the favorite');
+            } else if (state.isLogin === true && input.type === 'article') {
+                const articleList = [...state.itemArticleFavorites];
+
+                state.articles.forEach(item => {
+                    if(item.id === input.id) {
+                        articleList.push(item);
+                    }
+                });
+
+                console.log(articleList);
+
+                commit('setItemArticleFavorites', articleList);
+
+                alert('Artcle has been added to the favorite');
+            } else {
+                alert('You are not logged in. Please log in to use this feature.');
+            }
         },
 
         removeItemFromFavorite(id) {
