@@ -4,7 +4,7 @@
             <img class="card-img-top w-25 float-left" src="https://i.pinimg.com/736x/6e/74/63/6e7463744c9fdf25c505adfd51902f50.jpg" alt="...">
             <div class="card-body w-20 float-left">
                 <h4 class="card-title">
-                    <router-link href="#" :to="{ name: ''}">{{ item.name }} - ({{ item.sku }})</router-link>
+                    <router-link href="#" :to="{ name: 'product.detail', params: { id: item.id } }">{{ item.name }} - ({{ item.sku }})</router-link>
                 </h4>
                 <h5 class="card-subtitle mb-1 text-muted">{{ item.price }}đ</h5>
                 <p class="card-text">Type: {{ item.type }}</p>

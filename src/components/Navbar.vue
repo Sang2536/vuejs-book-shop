@@ -32,6 +32,7 @@
                     <div class="dropdown-menu dropdown" aria-labelledby="navbarDropdownMenuLink">
                         <router-link class="dropdown-item" :to="{ name: 'profile.index', params: { uid: userLogin.uid } }">Profile</router-link>
                         <router-link class="dropdown-item" :to="{ name: 'favorite.index', params: { uid: userLogin.uid } }">Favorites</router-link>
+                        <router-link class="dropdown-item" :to="{ name: 'todo.index', params: { uid: userLogin.uid } }">To do</router-link>
                         <a class="dropdown-item" @click="logout">Logout</a>
                     </div>
                 </li>

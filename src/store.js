@@ -1,6 +1,7 @@
 import { createStore } from "vuex";
 import helper from "./helper";
 
+const BASE_URL = window.location.origin;
 const CART_STORAGE_KEY = "SHOPPING_CART";
 // const FAVORITE_STORAGE_KEY = "FAVORITE_KEY";
 
@@ -295,8 +296,7 @@ const store = createStore({
             }
         },
 
-        // eslint-disable-next-line no-empty-pattern
-        async fetchRegister({}, input) {
+        async fetchRegister(input) {
             try {
                 //  lỗi k đúng data input trong db.json
                 const res = await helper.fetchPost('http://localhost:3000/users', input);
@@ -305,9 +305,11 @@ const store = createStore({
 
                 const data = await res.json();
 
-                return data;
+                if(data) {
+                    window.location = BASE_URL + "/login";
+                }
             } catch (error) {
-                console.log(error);
+                alert(`Error: ${error}`);
             }
         },
 
@@ -334,15 +336,19 @@ const store = createStore({
 
                 const data = await res.json();
 
-                commit('setIsLogin', true);
-                commit('setUserLogin', data[0].user);
+                if(data) {
+                    commit('setIsLogin', true);
+                    commit('setUserLogin', data[0].user);
+
+                    // window.location = BASE_URL + "/home";
+                }
             } catch (error) {
-                console.log(error);
+                alert(`Error: ${error}`);
             }
         },
 
-        logout({ commit }) {
-            if(this.state.isLogin == true) {
+        logout({ commit, state }) {
+            if(state.isLogin == true) {
                 commit('setIsLogin', false);
                 commit('setUserLogin', null);
             }
@@ -643,44 +649,70 @@ const store = createStore({
             }
         },
 
-        copyLinkToProduct(id) {
-            console.log(id);
+        copyLinkToProduct() {
+            const copyText = location.href;
+            navigator.clipboard.writeText(copyText);
+
+            alert('Copied!')
         },
 
-        async addTransaction({ commit, state }) {
-            const input = {
-                "id": 11111, 
-                "user_id": state.userLogin.id,
-                "transaction_date": new Date(),
-                "transaction_amount": state.totalAmountInCart,
-                "product": state.productInCart
-            };
+        async addTransaction({ commit, state, getters }) {
+            if(state.isLogin === true) {
+                const input = {
+                    "id": 11111, 
+                    "user_id": state.userLogin.id,
+                    "status": "order",
+                    "transaction_date": new Date(),
+                    "transaction_amount": getters.totalAmountInCart,
+                    "products": [...state.productInCart]
+                };
 
-            console.log(input);
+                console.log(input, [...state.productInCart]);
 
-            // const res = await helper.fetchPost('http://localhost:3000/transactions', input);
+                const res = await helper.fetchPost('http://localhost:3000/transactions', input);
 
-            // if(!res.ok) throw new Error('Something went wrong.');
+                if(!res.ok) throw new Error('Something went wrong.');
 
-            // const data = await res.json();
+                const data = await res.json();
 
-            commit('setProductInCart', [])
+                if(data) {
+                    commit('setProductInCart', [])
+
+                    alert('Successful transaction. Please check your orders regularly.');
+                }
+            } else {
+                alert('You are not logged in. Please log in to use this feature');
+            }
         },
 
-        showTransaction() {
-            console.log('buttonShowTransaction');
+        async showTransaction( { state }, id) {
+            if(state.isLogin === true) {
+                const res = await helper.fetchGet(`http://localhost:3000/transactions/${id}`);
+
+                if(!res.ok) throw new Error('Something went wrong.');
+
+                const data = await res.json();
+
+                if(data) {
+                    alert(`show transaction details with id=${id}`);
+                }
+            } else {
+                alert('You are not logged in. Please log in to use this feature');
+            }
         },
 
-        async destroyTransaction({ commit }, input) {
-            const res = await helper.fetchDelete('http://localhost:3000/transactions/' + input.id);
+        async destroyTransaction({ state }, input) {
+            if(state.isLogin === true) {
+                const res = await helper.fetchDelete('http://localhost:3000/transactions/' + input.id);
 
-            if(!res.ok) throw new Error('Something went wrong.');
+                if(!res.ok) throw new Error('Something went wrong.');
 
-            const data = await res.json();
+                const data = await res.json();
 
-            console.log(data);
-
-            commit('setTransactionByUser', data);
+                if(data) alert('Successfully canceled the transaction.');
+            } else {
+                alert('You are not logged in. Please log in to use this feature');
+            }
         },
 
         pagination({ commit }, input) {

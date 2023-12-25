@@ -16,6 +16,7 @@ import CartPage from "./views/Cart.vue";
 import TransactionPage from "./views/Transaction.vue";
 import ProfileUserPage from "./views/ProfileUser.vue";
 import FavoritePage from "./views/Favorite.vue";
+import ToDoPage from "./views/TodoList.vue";
 import AboutUsPage from "./views/AboutUs.vue";
 
 
@@ -84,6 +85,11 @@ const routes = [
         path: "/favorite/:uid",
         name: "favorite.index",
         component: FavoritePage,
+    },
+    {
+        path: "/todo/:uid",
+        name: "todo.index",
+        component: ToDoPage,
     },
     {
         path: "/about-us",
