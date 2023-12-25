@@ -440,35 +440,24 @@ const store = createStore({
         addProductToCart({ commit, state }, id) {
             if(state.isLogin === true) {
                 const productList = [...state.productInCart];
-                var checkId = false;
 
-                // if already in cart
-                productList.map(item => {
+                //  get product
+                state.productAll.forEach(item => {
                     if(item.id === id) {
-                        item.quantity += 1;
-                        checkId = true;
+                        productList.push({
+                            "id": item.id,
+                            "sku": item.sku,
+                            "name": item.name,
+                            "price": item.price,
+                            "type": item.type,
+                            "quantity": 1,
+                        });
                     }
                 });
 
-                //  if not in cart
-                if(! checkId) {
-                    state.productAll.forEach(item => {
-                        if(item.id === id) {
-                            productList.push({
-                                "id": item.id,
-                                "sku": item.sku,
-                                "name": item.name,
-                                "price": item.price,
-                                "type": item.type,
-                                "quantity": 1,
-                            });
-                        }
-                    });
-                }
-
                 commit('setProductInCart', productList);
 
-                alert('Product has been added to the cart');
+                alert('Product has been added to the cart')
             } else {
                 alert('You are not logged in. Please log in to use this feature');
             }
