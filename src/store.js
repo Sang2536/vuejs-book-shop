@@ -1,6 +1,9 @@
 import { createStore } from "vuex";
 import helper from "./helper";
 
+const CART_STORAGE_KEY = "SHOPPING_CART";
+// const FAVORITE_STORAGE_KEY = "FAVORITE_KEY";
+
 const store = createStore({
     /*  state   =>  contains all data (nơi chứa toàn bộ dữ liệu của ứng dụng)   */
     state:  {
@@ -28,10 +31,9 @@ const store = createStore({
         productAccessory: null,
         productSearch: null,
         productDetail: null,
-        productInCart: [],
 
         //  cart
-        totalAmountInCart: 0,
+        productInCart: JSON.parse(localStorage.getItem(CART_STORAGE_KEY)),
 
         // transactions
         transactionByUser: null,
@@ -119,7 +121,17 @@ const store = createStore({
         },
 
         totalAmountInCart(state) {
-            return state.totalAmountInCart;
+            var totalAmount = 0;
+            const productList = [...state.productInCart];
+
+            productList.map(item => {
+                console.log(item.price, item.quantity);
+
+                // eslint-disable-next-line no-const-assign
+                totalAmount += item.price * item.quantity;
+            })
+
+            return totalAmount;
         },
 
         transactionByUser(state) {
@@ -211,6 +223,8 @@ const store = createStore({
 
         setProductInCart(state, productInCartPayload) {
             state.productInCart = productInCartPayload;
+
+            localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(state.productInCart));
         },
 
         setTotalAmountInCart(state, totalAmountInCartPayload) {
@@ -426,15 +440,6 @@ const store = createStore({
         addProductToCart({ commit, state }, id) {
             if(state.isLogin === true) {
                 const productList = [...state.productInCart];
-                var totalAmount = state.totalAmountInCart;
-
-                // productList.forEach((item, index) => {
-                //     if(item.id === id) {
-                //         productList[index].quantity = item.quantity + 1
-
-                //         totalAmount += item.price * (item.quantity + 1);
-                //     }
-                // });
 
                 //  get product
                 state.productAll.forEach(item => {
@@ -447,12 +452,10 @@ const store = createStore({
                             "type": item.type,
                             "quantity": 1,
                         });
-                        totalAmount += item.price;
                     }
                 });
 
                 commit('setProductInCart', productList);
-                commit('setTotalAmountInCart', totalAmount);
 
                 alert('Product has been added to the cart')
             } else {
@@ -462,37 +465,31 @@ const store = createStore({
 
         removeProductFromCart({ commit, state }, id) {
             const productList = [...state.productInCart];
-            var totalAmount = state.totalAmountInCart;
+            // var totalAmount = state.totalAmountInCart;
 
             productList.forEach((item, index) => {
                 if(item.id === id) {
                     productList.splice(index, 1);
-                    totalAmount -= item.price * item.quantity;
                 }
             });
 
             commit('setProductInCart', productList);
-            commit('setTotalAmountInCart', totalAmount);
         },
 
         changeQuantityInCart({ commit, state }, input) {
             if(state.isLogin === true) {
                 const productList = [...state.productInCart];
-                var totalAmount = state.totalAmountInCart;
 
                 //  get product
                 productList.forEach((item, index) => {
                     if(item.id === input.id && input.type === "plus") {
                         productList[index].quantity = item.quantity + 1;
-                        totalAmount += item.price;
                     } else if (item.id === input.id && input.type === "minus") {
                         productList[index].quantity = item.quantity - 1;
-                        totalAmount -= item.price;
                     }
                 });
 
                 commit('setProductInCart', productList);
-                commit('setTotalAmountInCart', totalAmount);
             } else {
                 alert('You are not logged in. Please log in to use this feature');
             }
